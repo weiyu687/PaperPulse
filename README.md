@@ -1,4 +1,4 @@
-# PaperPlus
+# PaperPulse
 
 ### 项目通过大模型提取paper创新点并保存
 ### 保存的内容示例如下：
@@ -23,5 +23,4 @@
 ### 将项目拉取到本地后，将paper保存到paper文件夹下，然后从[KIMi](https://platform.moonshot.cn/)获取API_KEY并填入main.py中
 ### 运行main.py即可自动提取创新点，保存到paper.json文件中
 
-#### 你好
 
