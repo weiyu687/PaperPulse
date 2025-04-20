@@ -1,0 +1,100 @@
+[
+    {
+        "paper_title": "HSNet: A hybrid semantic network for polyp segmentation",
+        "authors": [
+            "Wenchao Zhang",
+            "Chong Fu",
+            "Yu Zheng",
+            "Fangyuan Zhang",
+            "Yanli Zhao",
+            "Chiu-Wing Sham"
+        ],
+        "publication_date": "2022",
+        "innovations": [
+            {
+                "name": "Cross-Semantic Attention Module (CSA)",
+                "implementation": "该模块通过交互式注意力机制连接编码器和解码器，利用Transformer的全局统计能力和CNN的局部特征交互能力，通过通道全局统计描述符和空间全局描述符来提取全局特征，并通过交互式注意力机制生成更具区分性的特征，同时过滤掉噪声。",
+                "problem_solved": "解决了低层特征与高层层特征之间的语义鸿沟问题，提高了特征的区分性并减少了背景噪声的干扰。"
+            },
+            {
+                "name": "Hybrid Semantic Complementary Module (HSC)",
+                "implementation": "该模块由两个分支组成，一个改进的自注意力模块用于学习长期依赖关系，另一个是纯卷积的瓶颈架构用于模拟特征的局部细节。这两个分支的输出通过融合策略结合起来，以恢复息肉的外观细节。",
+                "problem_solved": "捕获了息肉的长期依赖特征和局部细节，提高了解码器的特征恢复能力。"
+            },
+            {
+                "name": "Multi-Scale Prediction Module (MSP)",
+                "implementation": "该模块通过在不同阶段的解码器输出特征上应用平行的1×1卷积层和上采样层来获得不同阶段的输出二进制掩模，并通过一个小的全连接网络来获得可学习的权重系数，然后通过自适应加权求和来获得预测输出掩模。",
+                "problem_solved": "整合了不同阶段的预测结果，保留了不同尺度的语义信息，并促进了网络梯度的流动，提高了分割性能。"
+            }
+        ]
+    },
+    {
+        "paper_title": "Adaptive Context Selection for Polyp Segmentation",
+        "authors": [
+            "Ruifei Zhang",
+            "Guanbin Li",
+            "Zhen Li",
+            "Shuguang Cui",
+            "Dahong Qian",
+            "Yizhou Yu"
+        ],
+        "publication_date": "12 Jan 2023",
+        "innovations": [
+            {
+                "name": "Adaptive Context Selection Network (ACSNet)",
+                "implementation": "基于编码器-解码器框架，包含局部上下文注意力(LCA)模块、全局上下文模块(GCM)和自适应选择模块(ASM)。LCA模块负责从编码器层传递局部上下文特征到解码器层，增强对前一层预测图中确定的困难区域的注意力。GCM旨在进一步探索全局上下文特征并发送到解码器层。ASM用于通过通道注意力自适应选择和聚合上下文特征。",
+                "problem_solved": "解决不同大小和形状的息肉对分割性能的影响，以及复杂样本对算法的挑战。"
+            },
+            {
+                "name": "Local Context Attention (LCA) 模块",
+                "implementation": "设计为一种空间注意力方案，通过预测图生成的注意力图来增强解码层中每个位置特征列的局部上下文增强，同时利用前一层的预测信心作为指导，迫使当前层关注更难的区域。",
+                "problem_solved": "增强对不确定和更复杂区域的关注，实现层级特征补充和预测精细化。"
+            },
+            {
+                "name": "Global Context Module (GCM)",
+                "implementation": "借鉴金字塔池化的思想设计，作为编码器分支顶部的独立模块，用于全局上下文推断，并将输出传递给每个ASM模块以补偿在层级细化过程中逐渐稀释的全局上下文。",
+                "problem_solved": "捕获全局上下文信息，并在解码器路径中每个设计的ASM模块中密集地提供全局上下文特征。"
+            },
+            {
+                "name": "Adaptive Selection Module (ASM)",
+                "implementation": "基于LCA生成的局部上下文特征、GCM的全局上下文特征以及前一个解码器块的输出特征作为输入，学习自适应选择上下文特征进行聚合。通过'Squeeze-and-Excitation'块自适应地重新校准通道特征响应以进行特征选择。",
+                "problem_solved": "为不同外观、大小和特征对比度的息肉区域选择不同的参考上下文值。"
+            }
+        ]
+    },
+    {
+        "paper_title": "Cross-level Feature Aggregation Network for Polyp Segmentation",
+        "authors": [
+            "Tao Zhou",
+            "Yi Zhou",
+            "Kelei He",
+            "Chen Gong",
+            "Jian Yang",
+            "Huazhu Fu",
+            "Dinggang Shen"
+        ],
+        "publication_date": "2023",
+        "innovations": [
+            {
+                "name": "Cross-level Feature Aggregated Network (CFA-Net)",
+                "implementation": "提出了一个新颖的网络结构，包括边界预测网络和息肉分割网络。边界预测网络用于生成边界感知特征，这些特征以逐层策略并入息肉分割网络中，以提升分割性能。",
+                "problem_solved": "解决了在结肠镜图像中准确分割息肉的挑战，尤其是处理息肉与周围环境之间界限不明显的问题。"
+            },
+            {
+                "name": "Cross-level Feature Fusion (CFF) Module",
+                "implementation": "设计了一个CFF模块来整合不同层级的相邻特征，能够表征跨层级和多尺度信息，以应对息肉尺度变化的问题。",
+                "problem_solved": "解决了如何有效整合深度语义和结构特征以生成最终分割图的问题，尤其是在处理不同尺度的息肉时。"
+            },
+            {
+                "name": "Boundary Aggregated Module (BAM)",
+                "implementation": "提出了BAM模块，以将边界信息并入分割网络，增强这些层次化特征以生成更精细的分割图。",
+                "problem_solved": "解决了在息肉分割中忽视边界信息的问题，通过BAM模块可以更好地捕捉边界上下文信息并提升分割性能。"
+            },
+            {
+                "name": "Two-stream Structure in Polyp Segmentation Network",
+                "implementation": "在息肉分割网络中采用了双流结构，以利用跨层级特征中的层次化语义信息。",
+                "problem_solved": "解决了如何从卷积层有效表征多尺度信息的问题，双流结构能够更好地捕获这些信息。"
+            }
+        ]
+    }
+]
